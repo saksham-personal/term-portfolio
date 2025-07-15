@@ -1,0 +1,14 @@
+{
+  "name": "spotify-auth-server",
+  "version": "1.0.0",
+  "description": "A simple server to get a Spotify refresh token.",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js"
+  },
+  "dependencies": {
+    "express": "^4.19.2",
+    "dotenv": "^16.4.5",
+    "axios": "^1.7.2"
+  }
+}
