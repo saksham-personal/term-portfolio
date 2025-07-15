@@ -175,14 +175,15 @@ export function NCMPCPPModal({
 
   // Fetch music files from public/music directory
   const fetchMusicFiles = useCallback(async () => {
+    setLoading(true)
     try {
-      setLoading(true)
       const response = await fetch("/api/music")
       const data = await response.json()
 
       if (data.error) {
         console.error(data.error)
         setTracks([])
+        setLoading(false)
         return
       }
 
@@ -190,7 +191,7 @@ export function NCMPCPPModal({
       let id = 1
 
       for (const filename of data.files) {
-        const filePath = `/music/${filename}`
+        const filePath = filename
         const metadata = await extractMetadata(filePath)
         foundTracks.push({
           id: id++,
@@ -356,8 +357,7 @@ export function NCMPCPPModal({
           ) : tracks.length === 0 ? (
             <div className="flex-1 flex items-center justify-center text-white">
               <div className="text-center">
-                <div className="text-sm mb-2">No music in directory</div>
-                <div className="text-xs text-white/60">Add .mp3 or .wav files to /public/music/</div>
+                <div className="text-sm mb-2">Loading Music...</div>
               </div>
             </div>
           ) : (

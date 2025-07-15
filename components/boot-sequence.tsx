@@ -83,7 +83,7 @@ export default function BootSequence() {
             <div className="flex mt-4">
               <span className="text-primary mr-2">{'>'}</span>
               <span className="typing-animation text-foreground/90">
-                Boot sequence complete. Welcome to Potui&apos;s secure terminal.
+                {"<Boot sequence complete. Welcome to Potui's secure terminal."}
               </span>
             </div>
           )}

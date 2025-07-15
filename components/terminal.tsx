@@ -24,6 +24,7 @@ import { ContactSection } from "@/components/sections/contact-section"
 import { LinksSection } from "@/components/sections/links-section"
 import { ImageAsciiLogo } from "@/components/image-ascii-logo"
 import { NCMPCPPModal } from "@/components/ncmpcpp-modal"
+import { SpotifyWidget } from "@/components/spotify-widget"
 
 type Command = {
   input: string
@@ -164,12 +165,12 @@ export default function Terminal() {
 
       case "resume":
         const link = document.createElement("a")
-        link.href = "/resume/tech_general__Copy_.pdf"
+        link.href = "/resume/resume.pdf"
         link.download = "Saksham_Kaushal_Resume.pdf"
         document.body.appendChild(link)
         link.click()
         document.body.removeChild(link)
-        output = <p className="text-white">Downloading resume...</p>
+        output = <p className="text-white">Downloading Saksham_Kaushal_Resume.pdf...</p>
         setCurrentSection(null)
         break
 
@@ -457,162 +458,165 @@ export default function Terminal() {
     return `${mins}:${secs.toString().padStart(2, "0")}`
   }
   return (
-    <div className="flex flex-col h-full">
-      <div className="bg-black border border-white/30 rounded-t-md p-2 flex items-center">
-        <TerminalIcon className="h-4 w-4 text-white mr-2" />
-        <span className="text-sm font-mono text-white">
-          potui@portfolio ~ {currentSection ? `/${currentSection}` : ""}
-        </span>
-        {ncmpcppInBackground && (
-          <span className="ml-2 text-xs text-white/60">[ncmpcpp in background]</span>
-        )}
-        {ncmpcppInBackground && isPlaying && currentTrack !== null && (
-          <span className="ml-4 text-xs text-white/60">
-            Playing: {tracks[currentTrack]?.title} [{formatTime(currentTime)}/{formatTime(duration)}]
+    <>
+      <div className="flex flex-col h-full">
+        <div className="bg-black border border-white/30 rounded-t-md p-2 flex items-center">
+          <TerminalIcon className="h-4 w-4 text-white mr-2" />
+          <span className="text-sm font-mono text-white">
+            potui@portfolio ~ {currentSection ? `/${currentSection}` : ""}
           </span>
+          {ncmpcppInBackground && (
+            <span className="ml-2 text-xs text-white/60">[ncmpcpp in background]</span>
+          )}
+          {ncmpcppInBackground && isPlaying && currentTrack !== null && (
+            <span className="ml-4 text-xs text-white/60">
+              Playing: {tracks[currentTrack]?.title} [{formatTime(currentTime)}/{formatTime(duration)}]
+            </span>
+          )}
+        </div>
+
+        <div ref={terminalRef} className="flex-1 bg-black border-x border-white/30 p-4 overflow-y-auto font-mono text-sm pb-16">
+          {commandHistory.map((cmd, index) => (
+            <div key={index} className="mb-4">
+              <div className="flex items-center text-white/70">
+                <span className="text-white mr-2">$</span>
+                <span>{cmd.input}</span>
+              </div>
+              <div className="mt-1 ml-4">{cmd.output}</div>
+            </div>
+          ))}
+        </div>
+
+        <div className="bg-black border border-white/30 rounded-b-md p-2">
+          <form onSubmit={handleSubmit} className="flex items-center">
+            <span className="text-white mr-2">$</span>
+            <input
+              ref={inputRef}
+              type="text"
+              value={input}
+              onChange={(e) => setInput(e.target.value)}
+              onKeyDown={handleKeyDown}
+              className="flex-1 bg-transparent border-none outline-none font-mono text-white"
+              aria-label="Terminal input"
+              autoComplete="off"
+              spellCheck="false"
+              disabled={!terminalHasFocus}
+            />
+          </form>
+        </div>
+
+        <nav className="mt-4 flex flex-wrap justify-center gap-2 mb-16 sm:mb-0">
+          <Button
+            variant="outline"
+            size="sm"
+            onClick={() => handleButtonClick("about")}
+           className="text-xs bg-black/50 hover:bg-white hover:text-black text-white border-white/30 transition-all duration-200"
+            disabled={!terminalHasFocus}
+          >
+            <User className="h-3 w-3 mr-1" />
+            About
+          </Button>
+          <Button
+            variant="outline"
+            size="sm"
+            onClick={() => handleButtonClick("education")}
+           className="text-xs bg-black/50 hover:bg-white hover:text-black text-white border-white/30 transition-all duration-200"
+            disabled={!terminalHasFocus}
+          >
+            <GraduationCap className="h-3 w-3 mr-1" />
+            Education
+          </Button>
+          <Button
+            variant="outline"
+            size="sm"
+            onClick={() => handleButtonClick("skills")}
+           className="text-xs bg-black/50 hover:bg-white hover:text-black text-white border-white/30 transition-all duration-200"
+            disabled={!terminalHasFocus}
+          >
+            <Shield className="h-3 w-3 mr-1" />
+            Skills
+          </Button>
+          <Button
+            variant="outline"
+            size="sm"
+            onClick={() => handleButtonClick("experience")}
+           className="text-xs bg-black/50 hover:bg-white hover:text-black text-white border-white/30 transition-all duration-200"
+            disabled={!terminalHasFocus}
+          >
+            <Briefcase className="h-3 w-3 mr-1" />
+            Experience
+          </Button>
+          <Button
+            variant="outline"
+            size="sm"
+            onClick={() => handleButtonClick("projects")}
+           className="text-xs bg-black/50 hover:bg-white hover:text-black text-white border-white/30 transition-all duration-200"
+            disabled={!terminalHasFocus}
+          >
+            <Code className="h-3 w-3 mr-1" />
+            Projects
+          </Button>
+          <Button
+            variant="outline"
+            size="sm"
+            onClick={() => handleButtonClick("contact")}
+           className="text-xs bg-black/50 hover:bg-white hover:text-black text-white border-white/30 transition-all duration-200"
+            disabled={!terminalHasFocus}
+          >
+            <Mail className="h-3 w-3 mr-1" />
+            Contact
+          </Button>
+          <Button
+            variant="outline"
+            size="sm"
+            onClick={() => handleButtonClick("links")}
+           className="text-xs bg-black/50 hover:bg-white hover:text-black text-white border-white/30 transition-all duration-200"
+            disabled={!terminalHasFocus}
+          >
+            <ExternalLink className="h-3 w-3 mr-1" />
+            Links
+          </Button>
+          <Button
+            variant="outline"
+            size="sm"
+            onClick={() => handleButtonClick("resume")}
+           className="text-xs bg-black/50 hover:bg-white hover:text-black text-white border-white/30 transition-all duration-200"
+            disabled={!terminalHasFocus}
+          >
+            <FileDown className="h-3 w-3 mr-1" />
+            Resume
+          </Button>
+          <Button
+            variant="outline"
+            size="sm"
+            onClick={() => handleButtonClick("blog")}
+           className="text-xs bg-black/50 hover:bg-white hover:text-black text-white border-white/30 transition-all duration-200"
+            disabled={!terminalHasFocus}
+          >
+            <BookOpen className="h-3 w-3 mr-1" />
+            Blog
+          </Button>
+        </nav>
+
+        {showNCMPCPP && (
+          <NCMPCPPModal
+            isOpen={showNCMPCPP}
+            onClose={handleNCMPCPPClose}
+            onBackground={handleNCMPCPPBackground}
+            isInBackground={ncmpcppInBackground}
+            tracks={tracks}
+            setTracks={setTracks}
+            currentTrack={currentTrack}
+            isPlaying={isPlaying}
+            currentTime={currentTime}
+            duration={duration}
+            playTrack={playTrack}
+            togglePlayPause={togglePlayPause}
+            stopMusic={stopMusic}
+          />
         )}
       </div>
-
-      <div ref={terminalRef} className="flex-1 bg-black border-x border-white/30 p-4 overflow-y-auto font-mono text-sm">
-        {commandHistory.map((cmd, index) => (
-          <div key={index} className="mb-4">
-            <div className="flex items-center text-white/70">
-              <span className="text-white mr-2">$</span>
-              <span>{cmd.input}</span>
-            </div>
-            <div className="mt-1 ml-4">{cmd.output}</div>
-          </div>
-        ))}
-      </div>
-
-      <div className="bg-black border border-white/30 rounded-b-md p-2">
-        <form onSubmit={handleSubmit} className="flex items-center">
-          <span className="text-white mr-2">$</span>
-          <input
-            ref={inputRef}
-            type="text"
-            value={input}
-            onChange={(e) => setInput(e.target.value)}
-            onKeyDown={handleKeyDown}
-            className="flex-1 bg-transparent border-none outline-none font-mono text-white"
-            aria-label="Terminal input"
-            autoComplete="off"
-            spellCheck="false"
-            disabled={!terminalHasFocus}
-          />
-        </form>
-      </div>
-
-      <nav className="mt-4 flex flex-wrap justify-center gap-2">
-        <Button
-          variant="outline"
-          size="sm"
-          onClick={() => handleButtonClick("about")}
-         className="text-xs bg-black/50 hover:bg-white hover:text-black text-white border-white/30 transition-all duration-200"
-          disabled={!terminalHasFocus}
-        >
-          <User className="h-3 w-3 mr-1" />
-          About
-        </Button>
-        <Button
-          variant="outline"
-          size="sm"
-          onClick={() => handleButtonClick("education")}
-         className="text-xs bg-black/50 hover:bg-white hover:text-black text-white border-white/30 transition-all duration-200"
-          disabled={!terminalHasFocus}
-        >
-          <GraduationCap className="h-3 w-3 mr-1" />
-          Education
-        </Button>
-        <Button
-          variant="outline"
-          size="sm"
-          onClick={() => handleButtonClick("skills")}
-         className="text-xs bg-black/50 hover:bg-white hover:text-black text-white border-white/30 transition-all duration-200"
-          disabled={!terminalHasFocus}
-        >
-          <Shield className="h-3 w-3 mr-1" />
-          Skills
-        </Button>
-        <Button
-          variant="outline"
-          size="sm"
-          onClick={() => handleButtonClick("experience")}
-         className="text-xs bg-black/50 hover:bg-white hover:text-black text-white border-white/30 transition-all duration-200"
-          disabled={!terminalHasFocus}
-        >
-          <Briefcase className="h-3 w-3 mr-1" />
-          Experience
-        </Button>
-        <Button
-          variant="outline"
-          size="sm"
-          onClick={() => handleButtonClick("projects")}
-         className="text-xs bg-black/50 hover:bg-white hover:text-black text-white border-white/30 transition-all duration-200"
-          disabled={!terminalHasFocus}
-        >
-          <Code className="h-3 w-3 mr-1" />
-          Projects
-        </Button>
-        <Button
-          variant="outline"
-          size="sm"
-          onClick={() => handleButtonClick("contact")}
-         className="text-xs bg-black/50 hover:bg-white hover:text-black text-white border-white/30 transition-all duration-200"
-          disabled={!terminalHasFocus}
-        >
-          <Mail className="h-3 w-3 mr-1" />
-          Contact
-        </Button>
-        <Button
-          variant="outline"
-          size="sm"
-          onClick={() => handleButtonClick("links")}
-         className="text-xs bg-black/50 hover:bg-white hover:text-black text-white border-white/30 transition-all duration-200"
-          disabled={!terminalHasFocus}
-        >
-          <ExternalLink className="h-3 w-3 mr-1" />
-          Links
-        </Button>
-        <Button
-          variant="outline"
-          size="sm"
-          onClick={() => handleButtonClick("resume")}
-         className="text-xs bg-black/50 hover:bg-white hover:text-black text-white border-white/30 transition-all duration-200"
-          disabled={!terminalHasFocus}
-        >
-          <FileDown className="h-3 w-3 mr-1" />
-          Resume
-        </Button>
-        <Button
-          variant="outline"
-          size="sm"
-          onClick={() => handleButtonClick("blog")}
-         className="text-xs bg-black/50 hover:bg-white hover:text-black text-white border-white/30 transition-all duration-200"
-          disabled={!terminalHasFocus}
-        >
-          <BookOpen className="h-3 w-3 mr-1" />
-          Blog
-        </Button>
-      </nav>
-
-      {showNCMPCPP && (
-        <NCMPCPPModal
-          isOpen={showNCMPCPP}
-          onClose={handleNCMPCPPClose}
-          onBackground={handleNCMPCPPBackground}
-          isInBackground={ncmpcppInBackground}
-          tracks={tracks}
-          setTracks={setTracks}
-          currentTrack={currentTrack}
-          isPlaying={isPlaying}
-          currentTime={currentTime}
-          duration={duration}
-          playTrack={playTrack}
-          togglePlayPause={togglePlayPause}
-          stopMusic={stopMusic}
-        />
-      )}
-    </div>
+      <SpotifyWidget />
+    </>
   )
 }

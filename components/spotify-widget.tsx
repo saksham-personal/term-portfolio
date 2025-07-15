@@ -54,11 +54,11 @@ export function SpotifyWidget() {
   }
 
   return (
-    <div className="fixed bottom-4 right-4 z-40">
+    <div className="fixed bottom-0 left-0 right-0 sm:bottom-4 sm:right-4 sm:left-auto sm:w-auto z-40">
       <div className="relative" onMouseEnter={() => setShowTooltip(true)} onMouseLeave={() => setShowTooltip(false)}>
-        <a href={currentTrack.songUrl} target="_blank" rel="noopener noreferrer" className="flex items-center gap-2 bg-green-500 hover:bg-green-600 text-white px-3 py-2 rounded-full shadow-lg transition-all duration-300 hover:scale-105">
+        <a href={currentTrack.songUrl} target="_blank" rel="noopener noreferrer" className="flex items-center gap-3 bg-green-500/90 backdrop-blur-sm text-white px-4 py-1 sm:rounded-full shadow-lg transition-all duration-300 sm:hover:scale-105">
           <Music className="h-4 w-4" />
-          <div className="flex items-center gap-1">
+          <div className="flex items-center gap-1.5">
             {[...Array(4)].map((_, i) => (
               <div
                 key={i}
@@ -71,10 +71,15 @@ export function SpotifyWidget() {
               />
             ))}
           </div>
+          <div className="sm:hidden overflow-hidden whitespace-nowrap flex-1">
+            <span className="marquee text-sm font-bold tracking-wider">
+              {currentTrack.name} — {currentTrack.artist}
+            </span>
+          </div>
         </a>
 
         {showTooltip && (
-          <div className="absolute bottom-full right-0 mb-2 w-64 bg-black/90 border border-white/20 rounded-lg p-3 shadow-xl animate-in fade-in-0 zoom-in-95 duration-200">
+          <div className="absolute bottom-full right-0 mb-2 w-72 h-24 bg-black/90 border border-white/20 rounded-md p-3 shadow-xl animate-in fade-in-0 zoom-in-95 duration-200">
             <div className="flex items-center gap-3">
               <Image
                 src={currentTrack.albumImageUrl || "/placeholder.svg"}
@@ -99,3 +104,4 @@ export function SpotifyWidget() {
     </div>
   )
 }
+

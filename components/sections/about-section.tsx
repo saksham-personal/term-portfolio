@@ -6,7 +6,7 @@ export function AboutSection() {
         {" "}
         {/* Adjusted padding for responsiveness */}
         <div className="mb-8">
-          <h1 className="text-4xl sm:text-5xl font-bold text-white mb-2">Saksham Kaushal</h1>
+          <h1 className="text-lg sm:text-4xl md:text-5xl font-bold text-white mb-2">Saksham Kaushal</h1>
         </div>
         <div className="space-y-4 text-left">
 

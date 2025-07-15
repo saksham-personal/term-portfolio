@@ -36,7 +36,7 @@ export function CRTToggle() {
       aria-label="Toggle CRT effect"
       pressed={crtEnabled}
       onPressedChange={setCrtEnabled}
-      className="data-[state=on]:bg-primary/20"
+      className="hidden md:flex items-center data-[state=on]:bg-primary/20"
     >
       <Monitor className="h-4 w-4 mr-2" />
       CRT Effect
