@@ -47,11 +47,15 @@ export default function Terminal() {
   const [commandHistory, setCommandHistory] = useState<Command[]>([])
   const [historyIndex, setHistoryIndex] = useState(-1)
   const [currentSection, setCurrentSection] = useState<string | null>(null)
+  const [showWelcome, setShowWelcome] = useState(true)
   const [showNCMPCPP, setShowNCMPCPP] = useState(false)
   const [ncmpcppInBackground, setNCMPCPPInBackground] = useState(false)
   const [terminalHasFocus, setTerminalHasFocus] = useState(true)
   const inputRef = useRef<HTMLInputElement>(null)
   const terminalRef = useRef<HTMLDivElement>(null)
+  const lastCommandRef = useRef<HTMLDivElement>(null)
+  const buttonClickRef = useRef(false)
+  const welcomeMessageSent = useRef(false)
 
   // NCMPCPP State
   const [tracks, setTracks] = useState<Track[]>([])
@@ -68,190 +72,203 @@ export default function Terminal() {
     }
   }, [])
 
-  const executeCommand = useCallback((command: string) => {
-    let output: React.ReactNode
+  const executeCommand = useCallback(
+    (command: string) => {
+      let output: React.ReactNode
 
-    switch (command) {
-      case "help":
-        output = (
-          <div className="space-y-2 text-white">
-            <p className="font-bold">Available commands:</p>
-            <ul className="space-y-1">
-              <li>
-                <span className="text-white font-bold">about</span> - Learn about Saksham
-              </li>
-              <li>
-                <span className="text-white font-bold">education</span> - View educational background
-              </li>
-              <li>
-                <span className="text-white font-bold">skills</span> - See technical skills
-              </li>
-              <li>
-                <span className="text-white font-bold">experience</span> - View work experience
-              </li>
-              <li>
-                <span className="text-white font-bold">projects</span> - View projects
-              </li>
-              <li>
-                <span className="text-white font-bold">contact</span> - Get contact information
-              </li>
-              <li>
-                <span className="text-white font-bold">links</span> - View social media links
-              </li>
-              <li>
-                <span className="text-white font-bold">{"echo \"text\""}</span> - Print text to terminal
-              </li>
-              <li>
-                <span className="text-white font-bold">whoami</span> - Display current user
-              </li>
-              <li>
-                <span className="text-white font-bold">pwd</span> - Show current directory
-              </li>
-              <li>
-                <span className="text-white font-bold">ls</span> - List directory contents
-              </li>
-              <li>
-                <span className="text-white font-bold">ncmpcpp</span> - Open music player
-              </li>
-              <li>
-                <span className="text-white font-bold">clear</span> - Clear the terminal
-              </li>
-              <li>
-                <span className="text-white font-bold">resume</span> - Download resume
-              </li>
-              <li>
-                <span className="text-white font-bold">blog</span> - View blog posts
-              </li>
-            </ul>
-          </div>
-        )
-        setCurrentSection(null)
-        break
-
-      case "about":
-        output = <AboutSection />
-        setCurrentSection("about")
-        break
-
-      case "education":
-        output = <EducationSection />
-        setCurrentSection("education")
-        break
-
-      case "skills":
-        output = <SkillsSection />
-        setCurrentSection("skills")
-        break
-
-      case "experience":
-        output = <ExperienceSection />
-        setCurrentSection("experience")
-        break
-
-      case "projects":
-        output = <ProjectsSection />
-        setCurrentSection("projects")
-        break
-
-      case "contact":
-        output = <ContactSection />
-        setCurrentSection("contact")
-        break
-
-      case "links":
-        output = <LinksSection />
-        setCurrentSection("links")
-        break
-
-      case "resume":
-        const link = document.createElement("a")
-        link.href = "/resume/resume.pdf"
-        link.download = "Saksham_Kaushal_Resume.pdf"
-        document.body.appendChild(link)
-        link.click()
-        document.body.removeChild(link)
-        output = <p className="text-white">Downloading Saksham_Kaushal_Resume.pdf...</p>
-        setCurrentSection(null)
-        break
-
-      case "blog":
-        output = (
-          <div className="space-y-2 text-white">
-            <p>Blog posts coming soon...</p>
-            <p>Stay tuned for technical articles and insights!</p>
-          </div>
-        )
-        setCurrentSection("blog")
-        break
-
-      case "ncmpcpp":
-        setShowNCMPCPP(true)
-        setNCMPCPPInBackground(false)
-        setTerminalHasFocus(false)
-        output = <p className="text-white">Opening ncmpcpp music player...</p>
-        setCurrentSection(null)
-        break
-
-      case "whoami":
-        output = <p className="text-white">potui@portfolio - Saksham Kaushal</p>
-        setCurrentSection(null)
-        break
-
-      case "pwd":
-        output = <p className="text-white">/home/potui/portfolio</p>
-        setCurrentSection(null)
-        break
-
-      case "ls":
-        output = <p className="text-white">about education skills experience projects contact links</p>
-        setCurrentSection(null)
-        break
-
-      case "sudo rm -rf /":
-        output = <p className="text-red-500">Permission denied. Just kidding! Closing tab...</p>
-        setTimeout(() => {
-          window.close()
-        }, 2000)
-        setCurrentSection(null)
-        break
-
-      case "clear":
-        setCommandHistory([])
-        setCurrentSection(null)
-        setInput("")
-        return
-
-      default:
-        // Handle echo command with quotes
-        if (command.startsWith('echo "') && command.endsWith('"')) {
-          const text = command.slice(6, -1) // Remove 'echo "' and '"'
-          output = <p className="text-white">{text}</p>
-          setCurrentSection(null)
-        } else if (command.startsWith("echo ")) {
-          const text = command.slice(5) // Remove 'echo '
-          output = <p className="text-white">{text}</p>
-          setCurrentSection(null)
-        } else {
+      switch (command) {
+        case "welcome":
+          setShowWelcome(true)
           output = (
             <p className="text-white">
-              Command not found: {command}. Type <span className="text-white font-bold">help</span> to see available
-              commands.
+              { "Welcome to Saksham Kaushal's portfolio! Type help to see available commands." }
             </p>
           )
+          break
+        case "help":
+          output = (
+            <div className="space-y-2 text-white">
+              <p className="font-bold">Available commands:</p>
+              <ul className="space-y-1">
+                <li>
+                  <span className="text-white font-bold">welcome</span> - Show the welcome message
+                </li>
+                <li>
+                  <span className="text-white font-bold">about</span> - Learn about Saksham
+                </li>
+                <li>
+                  <span className="text-white font-bold">education</span> - View educational background
+                </li>
+                <li>
+                  <span className="text-white font-bold">skills</span> - See technical skills
+                </li>
+                <li>
+                  <span className="text-white font-bold">experience</span> - View work experience
+                </li>
+                <li>
+                  <span className="text-white font-bold">projects</span> - View projects
+                </li>
+                <li>
+                  <span className="text-white font-bold">contact</span> - Get contact information
+                </li>
+                <li>
+                  <span className="text-white font-bold">links</span> - View social media links
+                </li>
+                <li>
+                  <span className="text-white font-bold">{"echo \"text\""}</span> - Print text to terminal
+                </li>
+                <li>
+                  <span className="text-white font-bold">whoami</span> - Display current user
+                </li>
+                <li>
+                  <span className="text-white font-bold">pwd</span> - Show current directory
+                </li>
+                <li>
+                  <span className="text-white font-bold">ls</span> - List directory contents
+                </li>
+                <li>
+                  <span className="text-white font-bold">ncmpcpp</span> - Open music player
+                </li>
+                <li>
+                  <span className="text-white font-bold">clear</span> - Clear the terminal
+                </li>
+                <li>
+                  <span className="text-white font-bold">resume</span> - Download resume
+                </li>
+                <li>
+                  <span className="text-white font-bold">blog</span> - View blog posts
+                </li>
+              </ul>
+            </div>
+          )
           setCurrentSection(null)
-        }
-    }
+          break
 
-    // Add command to history
-    setCommandHistory((prev) => [
-      ...prev,
-      {
+        case "about":
+          output = <AboutSection />
+          setCurrentSection("about")
+          break
+
+        case "education":
+          output = <EducationSection />
+          setCurrentSection("education")
+          break
+
+        case "skills":
+          output = <SkillsSection />
+          setCurrentSection("skills")
+          break
+
+        case "experience":
+          output = <ExperienceSection />
+          setCurrentSection("experience")
+          break
+
+        case "projects":
+          output = <ProjectsSection />
+          setCurrentSection("projects")
+          break
+
+        case "contact":
+          output = <ContactSection />
+          setCurrentSection("contact")
+          break
+
+        case "links":
+          output = <LinksSection />
+          setCurrentSection("links")
+          break
+
+        case "resume":
+          const link = document.createElement("a")
+          link.href = "/resume/resume.pdf"
+          link.download = "Saksham_Kaushal_Resume.pdf"
+          document.body.appendChild(link)
+          link.click()
+          document.body.removeChild(link)
+          output = <p className="text-white">Downloading Saksham_Kaushal_Resume.pdf...</p>
+          setCurrentSection(null)
+          break
+
+        case "blog":
+          output = (
+            <div className="space-y-2 text-white">
+              <p>Blog posts coming soon...</p>
+              <p>Stay tuned for technical articles and insights!</p>
+            </div>
+          )
+          setCurrentSection("blog")
+          break
+
+        case "ncmpcpp":
+          setShowNCMPCPP(true)
+          setNCMPCPPInBackground(false)
+          setTerminalHasFocus(false)
+          output = <p className="text-white">Opening ncmpcpp music player...</p>
+          setCurrentSection(null)
+          break
+
+        case "whoami":
+          output = <p className="text-white">potui@portfolio - Saksham Kaushal</p>
+          setCurrentSection(null)
+          break
+
+        case "pwd":
+          output = <p className="text-white">/home/potui/portfolio</p>
+          setCurrentSection(null)
+          break
+
+        case "ls":
+          output = <p className="text-white">about education skills experience projects contact links</p>
+          setCurrentSection(null)
+          break
+
+        case "sudo rm -rf /":
+          output = <p className="text-red-500">Permission denied. Just kidding! Closing tab...</p>
+          setTimeout(() => {
+            window.close()
+          }, 2000)
+          setCurrentSection(null)
+          break
+
+        case "clear":
+          setCommandHistory([])
+          setCurrentSection(null)
+          setShowWelcome(false)
+          setInput("")
+          return
+
+        default:
+          // Handle echo command with quotes
+          if (command.startsWith('echo "') && command.endsWith('"')) {
+            const text = command.slice(6, -1) // Remove 'echo "' and '"'
+            output = <p className="text-white">{text}</p>
+            setCurrentSection(null)
+          } else if (command.startsWith("echo ")) {
+            const text = command.slice(5) // Remove 'echo '
+            output = <p className="text-white">{text}</p>
+            setCurrentSection(null)
+          } else {
+            output = (
+              <p className="text-white">
+                Command not found: {command}. Type <span className="text-white font-bold">help</span> to see available
+                commands.
+              </p>
+            )
+            setCurrentSection(null)
+          }
+      }
+
+      // Add command to history
+      const newCommand = {
         input: command,
         output,
         timestamp: new Date(),
-      },
-    ])
-  }, [])
+      }
+      setCommandHistory((prev) => [...prev, newCommand])
+    },
+    [],
+  )
 
   // Create audio element on mount
   useEffect(() => {
@@ -349,7 +366,11 @@ export default function Terminal() {
   }, [])
 
   useEffect(() => {
-    const handleClick = () => {
+    const handleClick = (e: MouseEvent) => {
+      const target = e.target as HTMLElement
+      if (target.closest("button")) {
+        return
+      }
       if (terminalHasFocus) {
         inputRef.current?.focus()
       }
@@ -363,28 +384,30 @@ export default function Terminal() {
   }, [terminalHasFocus])
 
   useEffect(() => {
-    // Add welcome message only once on initial render
-    if (commandHistory.length === 0) {
-      setCommandHistory([
-        {
-          input: "welcome",
-          output: (
-            <div className="space-y-2">
-              <ImageAsciiLogo />
-              <p className="font-mono text-white">
-                Welcome to Saksham Kaushal&apos;s portfolio! Type help to see available commands.
-              </p>
-            </div>
-          ),
-          timestamp: new Date(),
-        },
-      ])
+    if (!welcomeMessageSent.current) {
+      executeCommand("welcome")
+      welcomeMessageSent.current = true
     }
-  }, [commandHistory.length])
+  }, [executeCommand])
 
   useEffect(() => {
-    scrollToBottom()
-  }, [commandHistory, currentSection, scrollToBottom])
+    if (buttonClickRef.current) {
+      const terminal = terminalRef.current
+      if (terminal) {
+        const lastCommand = lastCommandRef.current
+        if (lastCommand) {
+          const top = lastCommand.offsetTop
+          terminal.scrollTo({
+            top: top,
+            behavior: "instant",
+          })
+        }
+      }
+      buttonClickRef.current = false
+    } else {
+      scrollToBottom()
+    }
+  }, [commandHistory, scrollToBottom])
 
   useEffect(() => {
     if (terminalHasFocus) {
@@ -396,6 +419,7 @@ export default function Terminal() {
     e.preventDefault()
     if (!input.trim() || !terminalHasFocus) return
 
+    buttonClickRef.current = false
     const command = input.trim().toLowerCase()
     executeCommand(command)
     setInput("")
@@ -428,6 +452,7 @@ export default function Terminal() {
   const handleButtonClick = (command: string) => {
     if (!terminalHasFocus) return
 
+    buttonClickRef.current = true
     executeCommand(command)
     setInput("")
     setHistoryIndex(-1)
@@ -475,9 +500,10 @@ export default function Terminal() {
           )}
         </div>
 
-        <div ref={terminalRef} className="flex-1 bg-black border-x border-white/30 p-4 overflow-y-auto font-mono text-sm pb-16">
+        <div ref={terminalRef} className="relative flex-1 bg-black border-x border-white/30 p-4 overflow-y-auto font-mono text-sm pb-16">
+          {showWelcome && <ImageAsciiLogo />}
           {commandHistory.map((cmd, index) => (
-            <div key={index} className="mb-4">
+            <div key={index} ref={index === commandHistory.length - 1 ? lastCommandRef : null} className="mb-4">
               <div className="flex items-center text-white/70">
                 <span className="text-white mr-2">$</span>
                 <span>{cmd.input}</span>

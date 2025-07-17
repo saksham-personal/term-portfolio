@@ -12,7 +12,7 @@ export function ContactSection() {
             <Mail className="h-4 w-4 mr-2" />
             Email
           </h3>
-          <a href="mailto:saksham.kaushal.official@gmail.com" className="text-sm hover:text-primary transition-colors">
+          <a href="mailto:saksham.kaushal.official@gmail.com" className="text-sm hover:text-primary transition-colors break-all">
           saksham.kaushal.official@gmail.com
           </a>
         </div>

@@ -56,25 +56,21 @@ export function SpotifyWidget() {
   return (
     <div className="fixed bottom-0 left-0 right-0 sm:bottom-4 sm:right-4 sm:left-auto sm:w-auto z-40">
       <div className="relative" onMouseEnter={() => setShowTooltip(true)} onMouseLeave={() => setShowTooltip(false)}>
-        <a href={currentTrack.songUrl} target="_blank" rel="noopener noreferrer" className="flex items-center gap-3 bg-green-500/90 backdrop-blur-sm text-white px-4 py-1 sm:rounded-full shadow-lg transition-all duration-300 sm:hover:scale-105">
-          <Music className="h-4 w-4" />
-          <div className="flex items-center gap-1.5">
-            {[...Array(4)].map((_, i) => (
-              <div
-                key={i}
-                className="w-1 bg-white rounded-full animate-pulse"
-                style={{
-                  height: `${12 + Math.sin(Date.now() / 200 + i) * 8}px`,
-                  animationDelay: `${i * 0.1}s`,
-                  animationDuration: `${0.8 + i * 0.2}s`,
-                }}
-              />
-            ))}
+        <a href={currentTrack.songUrl} target="_blank" rel="noopener noreferrer" className="spotify-widget flex items-center gap-3 bg-green-500/90 backdrop-blur-sm text-white px-4 py-2 sm:rounded-full shadow-lg transition-all duration-300 sm:hover:scale-105">
+          <Music className="h-5 w-5" />
+          <div className="hidden sm:block">
+            <div className="font-bold text-sm">{currentTrack.name}</div>
+            <div className="text-xs text-white/80">{currentTrack.artist}</div>
           </div>
           <div className="sm:hidden overflow-hidden whitespace-nowrap flex-1">
-            <span className="marquee text-sm font-bold tracking-wider">
-              {currentTrack.name} — {currentTrack.artist}
-            </span>
+            <div className="marquee-container">
+              <span className="marquee-text text-sm font-bold tracking-wider">
+                {currentTrack.name} — {currentTrack.artist}
+              </span>
+              <span className="marquee-text text-sm font-bold tracking-wider" aria-hidden="true">
+                {currentTrack.name} — {currentTrack.artist}
+              </span>
+            </div>
           </div>
         </a>
 
@@ -104,4 +100,3 @@ export function SpotifyWidget() {
     </div>
   )
 }
-

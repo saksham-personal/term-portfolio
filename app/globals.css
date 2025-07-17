@@ -316,16 +316,38 @@
 
 @keyframes marquee {
   from {
-    transform: translateX(100%);
+    transform: translateX(0);
   }
   to {
     transform: translateX(-100%);
   }
 }
 
-.marquee {
-  display: inline-block;
+.marquee-container {
+  display: flex;
+  width: max-content;
+  animation: marquee 10s linear infinite;
+}
+
+.marquee-text {
+  flex-shrink: 0;
+  padding-right: 2rem;
   white-space: nowrap;
-  animation: marquee 15s linear infinite;
-  padding-left: 100%;
+}
+
+@media (max-width: 640px) {
+  .font-mono {
+    font-size: 0.75rem; /* Adjust font size for smaller screens */
+  }
+  .p-4 {
+    padding: 0.75rem; /* Adjust padding for smaller screens */
+  }
+}
+
+.spotify-widget {
+  transition: all 0.3s ease-in-out;
+}
+
+.spotify-widget:hover {
+  box-shadow: 0 0 20px rgba(34, 197, 94, 0.6);
 }
