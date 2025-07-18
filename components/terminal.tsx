@@ -81,7 +81,7 @@ export default function Terminal() {
           setShowWelcome(true)
           output = (
             <p className="text-white">
-              { "Welcome to Saksham Kaushal's portfolio! Type help to see available commands." }
+             { "Welcome to Saksham Kaushal's portfolio! Type help to see available commands."}
             </p>
           )
           break
@@ -621,6 +621,16 @@ export default function Terminal() {
           >
             <BookOpen className="h-3 w-3 mr-1" />
             Blog
+          </Button>
+          <Button
+            variant="outline"
+            size="sm"
+            onClick={() => handleButtonClick("contact")}
+            className="text-xs bg-green-500/20 hover:bg-green-500/40 text-green-400 border-green-500/30 transition-all duration-200 glowing-green-button"
+            disabled={!terminalHasFocus}
+          >
+            <span className="green-dot" />
+            Looking for work
           </Button>
         </nav>
 
