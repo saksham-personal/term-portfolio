@@ -180,24 +180,15 @@ export default function Terminal() {
           break
 
         case "resume":
-          const link = document.createElement("a")
-          link.href = "/resume/resume.pdf"
-          link.download = "Saksham_Kaushal_Resume.pdf"
-          document.body.appendChild(link)
-          link.click()
-          document.body.removeChild(link)
-          output = <p className="text-white">Downloading Saksham_Kaushal_Resume.pdf...</p>
+          window.open("/resume", "_blank")
+          output = <p className="text-white">Opening resume in a new tab...</p>
           setCurrentSection(null)
           break
 
         case "blog":
-          output = (
-            <div className="space-y-2 text-white">
-              <p>Blog posts coming soon...</p>
-              <p>Stay tuned for technical articles and insights!</p>
-            </div>
-          )
-          setCurrentSection("blog")
+          window.open("/blog", "_blank")
+          output = <p className="text-white">Opening blog in a new tab...</p>
+          setCurrentSection(null)
           break
 
         case "ncmpcpp":
