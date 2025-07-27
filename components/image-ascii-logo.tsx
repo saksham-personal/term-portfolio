@@ -22,6 +22,17 @@ Music Player Daemon (MPD) client
 Connecting to MPD server...
 `}
       </pre>
+      <p className="text-white mt-2 text-xs sm:text-sm md:text-base">
+        To download my resume -{'>'}{' '}
+        <a
+          href="/resume"
+          target="_blank"
+          rel="noopener noreferrer"
+          className="text-green-400 glowing-green-link"
+        >
+          click here
+        </a>
+      </p>
     </div>
   )
 }
