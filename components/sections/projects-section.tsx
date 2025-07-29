@@ -6,18 +6,18 @@ import { title } from "process"
 const projects = [
   {
     title: "PDFLion",
-    link: "#",
+    link: "https://pdflion.xyz",
     introduction: "A powerful tool for all your PDF needs.",
     points: [
-      "Merge, split, and compress PDFs with ease.",
-      "Convert PDFs to various formats.",
-      "Secure your PDFs with passwords and watermarks.",
+      "Convert PDFs to notes, flashcards, summaries",
+      "Credit system for premium features",
+      "Payment integration with ...",
     ],
-    technologies: ["Python", "AWS", "React", "Node.js"],
+    technologies: ["React", "Next.js", "Vercel", "Node.js", "Express.js", "RabbitMQ", "PostgreSQL"],
   },
   {
     title: "Evo2 Variant Analysis",
-    link: "#",
+    link: "",
     introduction: "An in-depth analysis of Evo2 variants.",
     points: [
       "Track and analyze genetic variations.",
@@ -28,7 +28,7 @@ const projects = [
   },
   {
     title: "Forever Ecom",
-    link: "#",
+    link: "",
     introduction: "An e-commerce platform for sustainable products.",
     points: [
       "Browse and purchase eco-friendly products.",
@@ -39,7 +39,7 @@ const projects = [
   },
   {
     title: "CasePrep AI",
-    link: "#",
+    link: "",
     introduction: "AI-powered case preparation tool for lawyers.",
     points: [
       "Automate document review and analysis.",
@@ -50,7 +50,7 @@ const projects = [
   },
   {
     title: "Gmail Account Creator",
-    link: "#",
+    link: "",
     introduction: "Automate the creation of Gmail accounts.",
     points: [
       "Create multiple Gmail accounts quickly.",
@@ -61,7 +61,7 @@ const projects = [
   },
   {
     title: "pyaraCensorBot",
-    link: "#",
+    link: "",
     introduction: "A bot for censoring text in images.",
     points: [
       "Detect and blur sensitive information in images.",
@@ -72,7 +72,7 @@ const projects = [
   }, 
   {
     title: "AI Podcast Clipper",
-    link: "#",
+    link: "",
     introduction: "AI-powered tool for clipping podcast episodes.",
     points: [
       "Automatically detect and clip highlights from podcast episodes.",
@@ -103,27 +103,27 @@ const projects = [
     ],
     technologies: ["React", "Node.js", "MongoDB", "Express.js"],  
   },
-  {
-    title: "ScrapeFlow",
-    link: "#",
-    introduction: "A web scraping tool for data extraction.",
-    points: [
-      "Extract data from websites with ease.",
-      "Support for multiple data formats.",
-    ],
-    technologies: ["Python", "Beautiful Soup", "Scrapy", "Pandas"], 
-  },
-  {
-    title: "ElevenLabs Clone",
-    link: "#",
-    introduction: "A clone of the ElevenLabs voice synthesis platform.",
-    points: [
-      "Generate high-quality voiceovers from text.",
-      "Support for multiple languages and accents.",
-      "Easy integration with existing applications.",
-    ],
-    technologies: ["Python", "Flask", "TensorFlow", "React"],
-  },
+  // {
+  //   title: "ScrapeFlow",
+  //   link: "#",
+  //   introduction: "A web scraping tool for data extraction.",
+  //   points: [
+  //     "Extract data from websites with ease.",
+  //     "Support for multiple data formats.",
+  //   ],
+  //   technologies: ["Python", "Beautiful Soup", "Scrapy", "Pandas"], 
+  // },
+  // {
+  //   title: "ElevenLabs Clone",
+  //   link: "#",
+  //   introduction: "A clone of the ElevenLabs voice synthesis platform.",
+  //   points: [
+  //     "Generate high-quality voiceovers from text.",
+  //     "Support for multiple languages and accents.",
+  //     "Easy integration with existing applications.",
+  //   ],
+  //   technologies: ["Python", "Flask", "TensorFlow", "React"],
+  // },
   {
     title: "OpenCV Sudoku Solver",
     link: "#",
@@ -157,69 +157,69 @@ const projects = [
     ],
     technologies: ["React", "Node.js", "WebRTC", "Socket.io"],  
   },
-  {
-    title: "Python anti-fingerprinting library",
-    link: "#",
-    introduction: "A library to help protect user privacy by reducing browser fingerprinting.",
-    points: [
-      "Randomize browser characteristics to prevent tracking.",
-      "Support for multiple browsers and platforms.",
-      "Easy integration with existing web applications.",
-    ],
-    technologies: ["Python", "Flask", "Selenium", "Beautiful Soup"],
-  },
-  {
-    title: "tempmail SMTP protocol",
-    link: "#",
-    introduction: "A temporary email service for privacy protection.",
-    points: [
-      "Create temporary email addresses for one-time use.",
-      "Receive emails without revealing your personal address.",
-    ],
-    technologies: ["Python", "Flask", "Selenium", "Beautiful Soup"],
-  },
-  {
-    title: "Youtube Clone",
-    link: "#",
-    introduction: "A clone of the popular YouTube platform.",
-    points: [
-      "Upload and share videos with ease.",
-      "Discover new content through personalized recommendations.",
-      "Engage with other users through comments and likes.",
-    ],
-    technologies: ["React", "Node.js", "MongoDB", "Express.js"],  
-  },
-  {
-    title: "AI Agents",
-    link: "#",
-    introduction: "A platform for creating and managing AI agents.",
-    points: [
-      "Build custom AI agents for various tasks.",
-    ],
-    technologies: ["Llamaindex", "Langchain", "Langgraph", "RAG"],
-  },
-  {
-    title: "Scalable URL Shortener",
-    link: "#",
-    introduction: "A URL shortening service with advanced features.",
-    points: [
-      "Generate short links with custom aliases.",
-      "Track link analytics and performance metrics.",
-      "Integrate with popular messaging platforms.",
-    ],
-    technologies: ["Node.js", "Express.js", "MongoDB", "Redis"],
-  },
-  {
-    title: "Hinge clone - dating app",
-    link: "#",
-    introduction: "A clone of the popular Hinge dating app.",
-    points: [
-      "Create a profile and match with potential partners.",
-      "Engage in meaningful conversations with matches.",
-      "Discover new connections through personalized recommendations.",
-    ],
-    technologies: ["React", "Node.js", "MongoDB", "Express.js"],
-  },
+  // {
+  //   title: "Python anti-fingerprinting library",
+  //   link: "#",
+  //   introduction: "A library to help protect user privacy by reducing browser fingerprinting.",
+  //   points: [
+  //     "Randomize browser characteristics to prevent tracking.",
+  //     "Support for multiple browsers and platforms.",
+  //     "Easy integration with existing web applications.",
+  //   ],
+  //   technologies: ["Python", "Flask", "Selenium", "Beautiful Soup"],
+  // },
+  // {
+  //   title: "tempmail SMTP protocol",
+  //   link: "#",
+  //   introduction: "A temporary email service for privacy protection.",
+  //   points: [
+  //     "Create temporary email addresses for one-time use.",
+  //     "Receive emails without revealing your personal address.",
+  //   ],
+  //   technologies: ["Python", "Flask", "Selenium", "Beautiful Soup"],
+  // },
+  // {
+  //   title: "Youtube Clone",
+  //   link: "#",
+  //   introduction: "A clone of the popular YouTube platform.",
+  //   points: [
+  //     "Upload and share videos with ease.",
+  //     "Discover new content through personalized recommendations.",
+  //     "Engage with other users through comments and likes.",
+  //   ],
+  //   technologies: ["React", "Node.js", "MongoDB", "Express.js"],  
+  // },
+  // {
+  //   title: "AI Agents",
+  //   link: "#",
+  //   introduction: "A platform for creating and managing AI agents.",
+  //   points: [
+  //     "Build custom AI agents for various tasks.",
+  //   ],
+  //   technologies: ["Llamaindex", "Langchain", "Langgraph", "RAG"],
+  // },
+  // {
+  //   title: "Scalable URL Shortener",
+  //   link: "#",
+  //   introduction: "A URL shortening service with advanced features.",
+  //   points: [
+  //     "Generate short links with custom aliases.",
+  //     "Track link analytics and performance metrics.",
+  //     "Integrate with popular messaging platforms.",
+  //   ],
+  //   technologies: ["Node.js", "Express.js", "MongoDB", "Redis"],
+  // },
+  // {
+  //   title: "Hinge clone - dating app",
+  //   link: "#",
+  //   introduction: "A clone of the popular Hinge dating app.",
+  //   points: [
+  //     "Create a profile and match with potential partners.",
+  //     "Engage in meaningful conversations with matches.",
+  //     "Discover new connections through personalized recommendations.",
+  //   ],
+  //   technologies: ["React", "Node.js", "MongoDB", "Express.js"],
+  // },
   
 
 ]

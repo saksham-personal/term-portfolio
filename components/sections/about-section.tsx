@@ -4,7 +4,6 @@ export function AboutSection() {
       {/* Left side - Content */}
       <div className="flex-1 pr-0 md:pr-8 space-y-6">
         {" "}
-        {/* Adjusted padding for responsiveness */}
         <div className="mb-8">
           <h1 className="text-lg sm:text-4xl md:text-5xl font-bold text-white mb-2">Saksham Kaushal</h1>
         </div>
@@ -60,10 +59,9 @@ export function AboutSection() {
         </div>
       </div>
 
-      {/* Right side - Gothic potui */}
+      {/* Right side - Gothic  */}
       <div className="flex-shrink-0 flex items-center justify-center w-full md:w-64 mt-8 md:mt-0">
         {" "}
-        {/* Adjusted width and margin for responsiveness */}
         <div
           className="text-6xl sm:text-7xl md:text-8xl font-bold text-white gothic-text"
           style={{

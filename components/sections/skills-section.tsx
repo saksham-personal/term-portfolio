@@ -66,8 +66,9 @@ export function SkillsSection() {
           </div>
           <div className="space-y-2">
             <div className="flex flex-wrap gap-2">
-              <span className="px-2 py-1 bg-primary/10 rounded text-xs">SQL</span>
+              <span className="px-2 py-1 bg-primary/10 rounded text-xs">MySQL</span>
               <span className="px-2 py-1 bg-primary/10 rounded text-xs">MongoDB</span>
+              <span className="px-2 py-1 bg-primary/10 rounded text-xs">SQLite</span>
               <span className="px-2 py-1 bg-primary/10 rounded text-xs">PostgreSQL</span>
             </div>
           </div>
@@ -89,7 +90,9 @@ export function SkillsSection() {
               <span className="px-2 py-1 bg-primary/10 rounded text-xs">OpenAI API</span>
               <span className="px-2 py-1 bg-primary/10 rounded text-xs">Gemini API</span>
               <span className="px-2 py-1 bg-primary/10 rounded text-xs">Modal</span>
-              <span className="px-2 py-1 bg-primary/10 rounded text-xs">Genkit</span>
+              <span className="px-2 py-1 bg-primary/10 rounded text-xs">Livekit</span>
+               <span className="px-2 py-1 bg-primary/10 rounded text-xs">CrewAI</span>
+
             </div>
           </div>
         </div>
@@ -104,8 +107,10 @@ export function SkillsSection() {
             <div className="flex flex-wrap gap-2">
               <span className="px-2 py-1 bg-primary/10 rounded text-xs">Numpy</span>
               <span className="px-2 py-1 bg-primary/10 rounded text-xs">Pandas</span>
-              <span className="px-2 py-1 bg-primary/10 rounded text-xs">Tableu</span>
+              <span className="px-2 py-1 bg-primary/10 rounded text-xs">Tableau</span>
               <span className="px-2 py-1 bg-primary/10 rounded text-xs">Excel</span>
+              <span className="px-2 py-1 bg-primary/10 rounded text-xs">R</span>
+
             </div>
           </div>
         </div>
